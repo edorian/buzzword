@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="source/autoload.php"
+<phpunit bootstrap="source/bootstrap.php"
          backupGlobals="false"
          backupStaticAttributes="false"
          strict="true"
