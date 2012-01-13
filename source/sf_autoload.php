@@ -10,6 +10,6 @@ $loader = new UniversalClassLoader();
 $loader->register();
 
 // Do i need to this every time I add something to vendor?
-$loader->registerNamespace('Symfony\\Component\\HttpFoundation', __DIR__.'/vendor/symfony/http-foundation');
+$loader->registerNamespace('Symfony\\Component\\HttpFoundation', __DIR__.'/../vendor/symfony/http-foundation');
  
  
