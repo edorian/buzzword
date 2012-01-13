@@ -21,3 +21,7 @@ wget http://getcomposer.org/composer.phar
 php composer.phar install
 ```
 
+Commit messages and policy while building this
+==============================================
+
+I've pretty much commited every time when something didn't work out instantly so I could track my progress of "this is broken, why is this broken?"
