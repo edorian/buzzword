@@ -12,7 +12,7 @@ class IndexTest extends PHPUnit_Framework_TestCase {
 
     public function testSayHelloToUser() {
         $this->expectOutputString('Hello Edo');
-        $request = Request::create('/hello?name=Edo');
+        $request = Request::create('/hello/Edo');
         include __DIR__ . '/../../source/htdocs/index.php';
     }
 
