@@ -11,9 +11,11 @@ if(!isset($request)) {
 }
 $response = new Response();
 
+$pages = __DIR__ . '/../pages/';
+
 $map = array(
-    '/index' => __DIR__ . '/htdocs/index.php',
-    '/bye'   => __DIR__ . '/htdocs/bye.php',
+    '/index' => $pages . 'index.php',
+    '/bye'   => $pages . 'bye.php',
 );
  
 $path = $request->getPathInfo();
