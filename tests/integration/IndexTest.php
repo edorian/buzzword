@@ -1,28 +1,26 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
-class HelloTest extends PHPUnit_Framework_TestCase {
+class IndexTest extends PHPUnit_Framework_TestCase {
 
     public function testSayHello() {
-        $request = Request::create('/index');
-        $response = new Response();
-        include __DIR__ . '/../../source/pages/hello.php';
-        $this->assertSame(
-            'Hello World',
-            $response->getContent()
-        );
+        $this->expectOutputString('Hello World');
+        $request = Request::create('/hello');
+        include __DIR__ . '/../../source/htdocs/index.php';
     }
 
     public function testSayHelloToUser() {
-        $request = Request::create('/index?name=Edo');
-        $response = new Response();
-        include __DIR__ . '/../../source/pages/hello.php';
-        $this->assertSame(
-            'Hello Edo',
-            $response->getContent()
-        );
+        $this->expectOutputString('Hello Edo');
+        $request = Request::create('/hello?name=Edo');
+        include __DIR__ . '/../../source/htdocs/index.php';
+    }
+
+    public function testSayGoodbye() {
+        $this->expectOutputString('Goodbye!');
+        $request = Request::create('/bye');
+        include __DIR__ . '/../../source/htdocs/index.php';
     }
 
 }
+
