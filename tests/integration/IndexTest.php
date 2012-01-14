@@ -3,12 +3,12 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class IndexTest extends PHPUnit_Framework_TestCase {
+class HelloTest extends PHPUnit_Framework_TestCase {
 
     public function testSayHello() {
         $request = Request::create('/index');
         $response = new Response();
-        include __DIR__ . '/../../source/pages/index.php';
+        include __DIR__ . '/../../source/pages/hello.php';
         $this->assertSame(
             'Hello World',
             $response->getContent()
@@ -18,7 +18,7 @@ class IndexTest extends PHPUnit_Framework_TestCase {
     public function testSayHelloToUser() {
         $request = Request::create('/index?name=Edo');
         $response = new Response();
-        include __DIR__ . '/../../source/pages/index.php';
+        include __DIR__ . '/../../source/pages/hello.php';
         $this->assertSame(
             'Hello Edo',
             $response->getContent()

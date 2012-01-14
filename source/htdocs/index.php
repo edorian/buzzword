@@ -14,7 +14,7 @@ $response = new Response();
 $pages = __DIR__ . '/../pages/';
 
 $map = array(
-    '/index' => $pages . 'index.php',
+    '/hello' => $pages . 'hello.php',
     '/bye'   => $pages . 'bye.php',
 );
  
