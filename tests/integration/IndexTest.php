@@ -7,16 +7,14 @@ class IndexTest extends PHPUnit_Framework_TestCase {
 
     public function testSayHello() {
         $this->expectOutputString('Hello World');
-        $request = new Request();
-        $response = new Response();
-        include __DIR__ . '/../../source/htdocs/index.php';
+        $request = Request::create('/index');
+        include __DIR__ . '/../../source/htdocs-init.php';
     }
 
     public function testSayHelloToUser() {
         $this->expectOutputString('Hello Edo');
-        $request = new Request(array('name' => 'Edo'));
-        $response = new Response();
-        include __DIR__ . '/../../source/htdocs/index.php';
+        $request = Request::create('/index?name=Edo');
+        include __DIR__ . '/../../source/htdocs-init.php';
     }
 
 }

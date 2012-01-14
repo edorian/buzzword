@@ -1,10 +1,13 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Request;
+
 class ByeTest extends PHPUnit_Framework_TestCase {
 
     public function testSayGoodbye() {
         $this->expectOutputString('Goodbye!');
-        include __DIR__ . '/../../source/htdocs/bye.php';
+        $request = Request::create('/bye');
+        include __DIR__ . '/../../source/htdocs-init.php';
     }
 
 }
