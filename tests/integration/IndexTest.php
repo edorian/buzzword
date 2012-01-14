@@ -16,7 +16,6 @@ class IndexTest extends PHPUnit_Framework_TestCase {
         $this->expectOutputString('Hello Edo');
         $request = new Request(array('name' => 'Edo'));
         $response = new Response();
-        $_GET['name'] = 'Edo';
         include __DIR__ . '/../../source/htdocs/index.php';
     }
 
