@@ -17,7 +17,7 @@ class IndexTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testSayGoodbye() {
-        $this->expectOutputString('Goodbye!');
+        $this->expectOutputString("Goodbye!\n\n");
         $request = Request::create('/bye');
         include __DIR__ . '/../../source/htdocs/index.php';
     }
