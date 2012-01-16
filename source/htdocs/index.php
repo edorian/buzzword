@@ -25,7 +25,17 @@ $response = new Response();
 
 $pages = __DIR__ . '/../pages/';
 
-$routes = require __DIR__ . '/../app.php';
+/* So now we want another application
+ Instead of throwing the old one away lets see if we can keep both.
+
+ Making a real framework out of this and seperating the application code 
+ from the frameworks code and folder structure let's patch in a app switch.
+ Doing it like this allows us to keep the current tests and nothing 'package' the 'framework' for now.
+*/
+if(!isset($application)) {
+    $application = 'demoApplication';
+}
+$routes = require __DIR__ . '/../' . $application . '.php';
 
 $context = new Routing\RequestContext();
 $context->fromRequest($request);

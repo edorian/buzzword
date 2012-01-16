@@ -2,7 +2,7 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
-class IndexTest extends PHPUnit_Framework_TestCase {
+class DemoApplicationTest extends PHPUnit_Framework_TestCase {
 
     public function testSayHello() {
         $this->expectOutputString('Hello World');
