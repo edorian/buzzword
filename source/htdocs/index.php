@@ -26,8 +26,25 @@ $response = new Response();
 $pages = __DIR__ . '/../pages/';
 
 $routes = new Routing\RouteCollection();
-$routes->add('hello', new Routing\Route('/hello/{name}', array('name' => 'World')));
-$routes->add('bye', new Routing\Route('/bye'));
+$routes->add(
+    'hello', 
+    new Routing\Route(
+        '/hello/{name}', 
+        array(
+            'name' => 'World',
+            '_controller' => 'render_template'
+        )
+    )
+);
+$routes->add(
+    'bye',
+    new Routing\Route(
+        '/bye',
+        array(
+            '_controller' => 'render_template'
+        )
+    )
+);
 
 $context = new Routing\RequestContext();
 $context->fromRequest($request);
@@ -35,7 +52,8 @@ $matcher = new Routing\Matcher\UrlMatcher($routes, $context);
 
 try {
     $request->attributes->add($matcher->match($request->getPathInfo()));
-    $response = render_template($request);
+    $controller = $request->attributes->get('_controller');
+    $response = $controller($request);
 } catch (Routing\Exception\ResourceNotFoundException $e) {
     $response = new Response('Not Found', 404);
 } catch (Exception $e) {
