@@ -43,8 +43,7 @@ $matcher = new Routing\Matcher\UrlMatcher($routes, $context);
 
 try {
     $request->attributes->add($matcher->match($request->getPathInfo()));
-    $controller = $request->attributes->get('_controller');
-    $response = $controller($request);
+    $response = call_user_func($request->attributes->get('_controller'), $request);
 } catch (Routing\Exception\ResourceNotFoundException $e) {
     $response = new Response('Not Found', 404);
 } catch (Exception $e) {
