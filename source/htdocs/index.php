@@ -35,7 +35,7 @@ $pages = __DIR__ . '/../pages/';
 if(!isset($application)) {
     $application = 'demoApplication';
 }
-$routes = require __DIR__ . '/../' . $application . '.php';
+$routes = require __DIR__ . '/../applications/' . $application . '.php';
 
 $context = new Routing\RequestContext();
 $context->fromRequest($request);
