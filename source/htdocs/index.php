@@ -28,8 +28,13 @@ $pages = __DIR__ . '/../pages/';
  from the frameworks code and folder structure let's patch in a app switch.
  Doing it like this allows us to keep the current tests and nothing 'package' the 'framework' for now.
 */
-if(!isset($application)) {
+if(!isset($application) || $application == 'demoApplication') {
     $application = 'demoApplication';
+    require_once __DIR__ . '/../applications/DemoApplicationControllerResolver.php';
+    // The first application doesn't work with ControllerResolver so lets to that properly
+    $resolver = new DemoApplicationControllerResolver();
+} else {
+    $resolver = new HttpKernel\Controller\ControllerResolver();
 }
 $routes = require __DIR__ . '/../applications/' . $application . '.php';
 
@@ -40,8 +45,6 @@ if(!isset($request)) {
 $context = new Routing\RequestContext();
 $context->fromRequest($request);
 $matcher = new Routing\Matcher\UrlMatcher($routes, $context);
-
-$resolver = new HttpKernel\Controller\ControllerResolver();
 
 $buzzword = new Buzzword\Framework($matcher, $resolver);
 // Funny, we put in the request 2 times... that can't be right

@@ -28,16 +28,9 @@ class Framework
                     $request->getPathInfo()
                 )
             );
-            // The new controllerResolver magic breaks the old functionality
-            // So lets modify the framework with application specific code again just to keep things running.
-            if($application != 'demoApplication') {
-                // Implicit knowleague
-                $controller = $resolver->getController($request);
-                $arguments = $resolver->getArguments($request, $controller);
-            } else {
-                $controller = $request->attributes->get('_controller');
-                $arguments = array($request);
-            }
+            // Legacy support moves into htdocs/index.php
+            $controller = $this->resolver->getController($request);
+            $arguments = $this->resolver->getArguments($request, $controller);
 
             return call_user_func_array($controller, $arguments);
         } catch (ResourceNotFoundException $e) {
