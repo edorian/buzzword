@@ -47,9 +47,17 @@ $resolver = new HttpKernel\Controller\ControllerResolver();
 
 try {
     $request->attributes->add($matcher->match($request->getPathInfo()));
-    // Implicit knowleague
-    $controller = $resolver->getController($request);
-    $arguments = $resolver->getArguments($request, $controller);
+
+    // The new controllerResolver magic breaks the old functionality
+    // So lets modify the framework with application specific code again just to keep things running.
+    if($application != 'demoApplication') {
+        // Implicit knowleague
+        $controller = $resolver->getController($request);
+        $arguments = $resolver->getArguments($request, $controller);
+    } else {
+        $controller = $request->attributes->get('_controller');
+        $arguments = array($request);
+    }
 
     $response = call_user_func_array($controller, $arguments);
 } catch (Routing\Exception\ResourceNotFoundException $e) {
