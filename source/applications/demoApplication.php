@@ -9,7 +9,9 @@ $routes->add(
         '/hello/{name}', 
         array(
             'name' => 'World',
-            '_controller' => 'render_template'
+            '_controller' => function($request) {
+                return render_template($request);
+            }
         )
     )
 );
@@ -18,7 +20,9 @@ $routes->add(
     new Routing\Route(
         '/bye',
         array(
-            '_controller' => 'render_template'
+            '_controller' => function($request) {
+                return render_template($request);
+            }
         )
     )
 );
