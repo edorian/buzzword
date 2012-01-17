@@ -7,11 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing;
 use Symfony\Component\HttpKernel;
 
-// Ugly hack to keep the tests for now
-if(!isset($request)) {
-    $request = Request::createFromGlobals();
-}
-
 // Hack to keep the tests going..
 if(!function_exists('render_template')) { 
     function render_template($request) {
@@ -38,34 +33,19 @@ if(!isset($application)) {
 }
 $routes = require __DIR__ . '/../applications/' . $application . '.php';
 
+// Ugly hack to keep the tests for now
+if(!isset($request)) {
+    $request = Request::createFromGlobals();
+}
 $context = new Routing\RequestContext();
 $context->fromRequest($request);
 $matcher = new Routing\Matcher\UrlMatcher($routes, $context);
 
 $resolver = new HttpKernel\Controller\ControllerResolver();
- 
 
-try {
-    $request->attributes->add($matcher->match($request->getPathInfo()));
-
-    // The new controllerResolver magic breaks the old functionality
-    // So lets modify the framework with application specific code again just to keep things running.
-    if($application != 'demoApplication') {
-        // Implicit knowleague
-        $controller = $resolver->getController($request);
-        $arguments = $resolver->getArguments($request, $controller);
-    } else {
-        $controller = $request->attributes->get('_controller');
-        $arguments = array($request);
-    }
-
-    $response = call_user_func_array($controller, $arguments);
-} catch (Routing\Exception\ResourceNotFoundException $e) {
-    $response = new Response('Not Found', 404);
-} catch (Exception $e) {
-    $response = new Response('An error occurred: ' . $e->getMessage(), 500);
-}
-
+$buzzword = new Buzzword\Framework($matcher, $resolver);
+// Funny, we put in the request 2 times... that can't be right
+$response = $buzzword->handle($request);
  
 $response->send();
 
