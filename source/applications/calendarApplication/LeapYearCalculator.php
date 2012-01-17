@@ -1,5 +1,7 @@
 <?php
 
+namespace Calendar;
+
 class LeapYearCalculator {
 
     public function isLeapYear($year = null) {

@@ -1,5 +1,7 @@
 <?php
 
+namespace Calendar;
+
 use Symfony\Component\Routing;
 use Symfony\Component\HttpFoundation\Response;
 
